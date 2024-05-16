@@ -114,41 +114,209 @@ class Awesomesauce extends Widget_Base {
 	 * @access protected
 	 */
 	protected function _register_controls() {
+		
+		
+
 		$this->start_controls_section(
-			'section_content',
-			array(
-				'label' => __( 'Content', 'elementor-awesomesauce' ),
-			)
+			'content_section',
+			[
+				'label' => esc_html__( 'Campos del Formulario', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
 		);
 
 		$this->add_control(
-			'title',
+			'popover-toggle',
+			[
+				'label' => esc_html__( 'First Name', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'textdomain' ),
+				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+			]
+		);
+
+
+		$this->start_popover();
+
+		$this->add_control(
+			'first_name_label',
 			array(
-				'label'   => __( 'Title', 'elementor-awesomesauce' ),
+				'label'   => __( 'Label', 'elementor-awesomesauce' ),
 				'type'    => Controls_Manager::TEXT,
-				'default' => __( 'Title', 'elementor-awesomesauce' ),
+				'default' => __( 'First Name', 'elementor-awesomesauce' ),
 			)
+		);
+		$this->add_control(
+			'first_name_placeholder',
+			array(
+				'label'   => __( 'Placeholder', 'elementor-awesomesauce' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( 'Choose a Name', 'elementor-awesomesauce' ),
+			)
+		);
+		$this->add_control(
+			'first_name_required',
+			[
+				'label' => esc_html__( 'Required', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'textdomain' ),
+				'label_off' => esc_html__( 'Hide', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
 		);
 
 		$this->add_control(
-			'description',
+			'id',
 			array(
-				'label'   => __( 'Description', 'elementor-awesomesauce' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'default' => __( 'Description', 'elementor-awesomesauce' ),
+				'label'   => __( 'Id', 'elementor-awesomesauce' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( '', 'elementor-awesomesauce' ),
 			)
+		);
+		
+
+		$this->end_popover();
+
+		$this->add_control(
+			'popover-toggle',
+			[
+				'label' => esc_html__( 'Status', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => esc_html__( 'Default', 'textdomain' ),
+				'label_on' => esc_html__( 'Custom', 'textdomain' ),
+				'return_value' => 'yes',
+			]
+		);
+
+
+		$this->start_popover();
+
+		$this->add_control(
+			'status',
+			[
+				'label' => esc_html__( 'Status', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'solid',
+				
+				'selectors' => [
+					'{{WRAPPER}} .your-class' => 'border-style: {{VALUE}};',
+				],
+			]
+		);
+		$this->end_popover();
+
+		$this->end_controls_section();
+
+		
+		
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'boton_section',
+			[
+				'label' => esc_html__( 'Boton', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
 		);
 
 		$this->add_control(
-			'content',
+			'boton_text',
 			array(
-				'label'   => __( 'Content', 'elementor-awesomesauce' ),
-				'type'    => Controls_Manager::WYSIWYG,
-				'default' => __( 'Content', 'elementor-awesomesauce' ),
+				'label'   => __( 'Texto del boton', 'elementor-awesomesauce' ),
+				'type'    => Controls_Manager::TEXT,
+				'default' => __( 'Save', 'elementor-awesomesauce' ),
 			)
+		);
+		
+
+		$this->end_controls_section();
+
+
+		$this->start_controls_section(
+			'style_section',
+			[
+				'label' => esc_html__( 'Estilos de formulario', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'content_typography',
+				'selector' => '{{WRAPPER}} .typhography',
+			]
+		);
+		
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'box_shadow',
+				'selector' => '{{WRAPPER}} .box-shadow',
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'border',
+				'selector' => '{{WRAPPER}} .border',
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'background',
+				'types' => [ 'classic', 'gradient' ],
+				"exclude" => ["image"],
+				'selector' => '{{WRAPPER}} .background',
+			]
 		);
 
 		$this->end_controls_section();
+
+
+
+		$this->start_controls_section(
+			'style_boton_section',
+			[
+				'label' => esc_html__( 'Estilos del boton', 'textdomain' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'boton_box_shadow',
+				'selector' => '{{WRAPPER}} .button-shadow',
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			[
+				'name' => 'boton_border',
+				'selector' => '{{WRAPPER}} .button-border',
+			]
+		);
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'boton_background',
+				'types' => [ 'classic', 'gradient' ],
+				"exclude" => ["image"],
+				'selector' => '{{WRAPPER}} .button-background',
+			]
+		);
+		
+
+		$this->end_controls_section();
+
 	}
 
 	/**
@@ -163,13 +331,15 @@ class Awesomesauce extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_inline_editing_attributes( 'title', 'none' );
-		$this->add_inline_editing_attributes( 'description', 'basic' );
-		$this->add_inline_editing_attributes( 'content', 'advanced' );
+
 		?>
-		<h2 <?php echo $this->get_render_attribute_string( 'title' ); ?>><?php echo wp_kses( $settings['title'], array() ); ?></h2>
-		<div <?php echo $this->get_render_attribute_string( 'description' ); ?>><?php echo wp_kses( $settings['description'], array() ); ?></div>
-		<div <?php echo $this->get_render_attribute_string( 'content' ); ?>><?php echo wp_kses( $settings['content'], array() ); ?></div>
+		<form action="" class="typhography box-shadow border background">
+		<div>
+			<label for="<?= $settings["first_name_id"];?>"><?= $settings["first_name_label"];?></label>
+			<input type="text" name="first_name" placeholder="<?= $settings["first_name_placeholder"];?>">
+		</div>
+		<button class="button-background button-border button-shadow" type="submit"><?= $settings["boton_text"];?></button>
+		</form>
 		<?php
 	}
 
@@ -184,14 +354,9 @@ class Awesomesauce extends Widget_Base {
 	 */
 	protected function _content_template() {
 		?>
-		<#
-		view.addInlineEditingAttributes( 'title', 'none' );
-		view.addInlineEditingAttributes( 'description', 'basic' );
-		view.addInlineEditingAttributes( 'content', 'advanced' );
-		#>
-		<h2 {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</h2>
-		<div {{{ view.getRenderAttributeString( 'description' ) }}}>{{{ settings.description }}}</div>
-		<div {{{ view.getRenderAttributeString( 'content' ) }}}>{{{ settings.content }}}</div>
+		
 		<?php
 	}
 }
+
+
