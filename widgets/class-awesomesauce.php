@@ -336,9 +336,9 @@ class Awesomesauce extends Widget_Base {
 		<form action="" class="typhography box-shadow border background">
 		<div>
 			<label for="<?= $settings["first_name_id"];?>"><?= $settings["first_name_label"];?></label>
-			<input type="text" name="first_name" placeholder="<?= $settings["first_name_placeholder"];?>">
+			<input class="typhography" type="text" name="first_name" placeholder="<?= $settings["first_name_placeholder"];?>">
 		</div>
-		<button class="button-background button-border button-shadow" type="submit"><?= $settings["boton_text"];?></button>
+		<button class="button-background button-border button-shadow typhography" type="submit"><?= $settings["boton_text"];?></button>
 		</form>
 		<?php
 	}
